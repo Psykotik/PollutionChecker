@@ -78,7 +78,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 holder.mButton.setText(msg.getIaqi().get(i).getV().get(0).toString());
                 holder.max.setText(msg.getIaqi().get(i).getV().get(2).toString());
                 holder.min.setText(msg.getIaqi().get(i).getV().get(1).toString());
-               
+                if(msg.getIaqi().get(i).getV().get(0)<50) {
+                    holder.global.setTextColor(ContextCompat.getColor(mCtx, R.color.green));
+                    holder.mButton.setBackgroundColor(ContextCompat.getColor(mCtx, R.color.green));
+                } else if(msg.getIaqi().get(i).getV().get(0)<100) {
+                    holder.global.setTextColor(ContextCompat.getColor(mCtx, R.color.orange));
+                    holder.mButton.setBackgroundColor(ContextCompat.getColor(mCtx, R.color.orange));
+                } else {
+                    holder.global.setTextColor(ContextCompat.getColor(mCtx, R.color.red));
+                    holder.mButton.setBackgroundColor(ContextCompat.getColor(mCtx, R.color.red));
+                }
             }
             if(msg.getIaqi().get(i).getP().contains("t")) {
                 String city = msg.getCity().getName();
