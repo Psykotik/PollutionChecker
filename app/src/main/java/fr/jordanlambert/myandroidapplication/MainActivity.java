@@ -1,10 +1,16 @@
 package fr.jordanlambert.myandroidapplication;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,6 +41,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Send email button
+        ImageButton shareBtn = (ImageButton) findViewById(R.id.button_share);
+        /*shareBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Log.i(TAG, "Sharebutton");
+                sendEmail();
+            }
+        });*/
+
+
+
 
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
@@ -73,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i=0; i<myDataset.size();i++) {
             getDataFromUrl("https://api.waqi.info/api/feed/"+myDataset.get(i)+"/obs.fr.json?token=950e003ec3f068fdfb1f76e10e14a1d15f927479");
+            Log.d(TAG, "Get data for id :" + i);
         }
 
     }
@@ -100,5 +119,28 @@ public class MainActivity extends AppCompatActivity {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
+
+    protected void sendEmail() {
+        Log.i("Send email", "");
+        String[] TO = {""};
+        String[] CC = {""};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Try PollutionCheckin Application !");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Hey ! Wassup ? I'm trying a new cool application, wanna try it ? Go for Psykotik github and search for PollutionChecker Repo. Hope you'll enjoy it ma boi !");
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            finish();
+            Log.i("Finished sending mail.", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(MainActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
 }
