@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Default theme (dark) -->
     <color name="colorPrimary">#333333</color>
     <color name="colorPrimaryDark">#212121</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- Opt. theme (light) -->
+    <color name="colorPrimaryLight">#FFF5F5F5</color>
+    <color name="colorPrimaryDarkLight">#FF757575</color>
+    <color name="colorAccentLight">#FF009688</color>
+
+
+    <!-- Secondary colors (no theme dependant) -->
     <color name="green">#4dff40</color>
     <color name="red">#ff4040</color>
     <color name="orange">#ffb940</color>
+
 </resources>
