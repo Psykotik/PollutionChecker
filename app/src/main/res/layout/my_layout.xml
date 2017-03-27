@@ -1,78 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="120dp"
     android:orientation="vertical">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="120dip"
         android:layout_margin="5dp"
         android:orientation="horizontal">
 
         <Button
-            android:text="PM10 38"
             android:id="@+id/button"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="center_vertical"
-            android:layout_height="60dp"
-            android:layout_width="60dp" />
-
-        <ImageView
-            android:layout_height="60dp"
             android:layout_width="60dp"
-            android:layout_marginRight="10dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/img_cloud"
-            android:id="@+id/imageView" />
+            android:layout_marginRight="10dp"
+            android:text="PM10 38" />
 
-        <TableLayout android:layout_width="match_parent"
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:stretchColumns="1"
+            android:gravity="center_vertical">
+
+            <TableRow>
+                <ImageButton
+                    android:id="@+id/button_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_share" />
+            </TableRow>
+
+            <TableRow>
+                <ImageButton
+                    android:id="@+id/button_refresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_refresh" />
+            </TableRow>
+
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:stretchColumns="1">
+
             <TableRow android:gravity="center_horizontal">
+
                 <TextView
                     android:id="@+id/globalinfo"
                     android:layout_width="match_parent"
                     android:text="Grenoble - 3°C"
-                    android:textStyle="normal|bold"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textStyle="normal|bold" />
             </TableRow>
 
             <TableRow>
-                <TextView android:id="@+id/gps"
-                    android:text="GPS"
-                    android:padding="3dip" />
+
                 <TextView
-                    android:text="Max"
+                    android:id="@+id/gps"
                     android:padding="3dip"
-                    android:textAlignment="textEnd"
-                    android:layout_gravity="end"/>
+                    android:text="GPS" />
+
                 <TextView
-                    android:text="102"
+                    android:layout_gravity="end"
+                    android:padding="3dip"
+                    android:text="Max"
+                    android:textAlignment="textEnd" />
+
+                <TextView
                     android:id="@+id/pm10Max"
                     android:gravity="right"
                     android:padding="3dip"
-                    android:textStyle="normal|bold"
-                    android:textSize="16sp" />
+                    android:text="102"
+                    android:textSize="16sp"
+                    android:textStyle="normal|bold" />
             </TableRow>
 
             <TableRow>
+
                 <TextView
-                    android:text="30 min"
                     android:id="@+id/lastUpdate"
-                    android:padding="3dip" />
-                <TextView
-                    android:text="Min"
                     android:padding="3dip"
-                    android:textAlignment="textEnd"
-                    android:layout_gravity="end"/>
+                    android:text="30 min" />
+
                 <TextView
-                    android:text="30"
+                    android:layout_gravity="end"
+                    android:padding="3dip"
+                    android:text="Min"
+                    android:textAlignment="textEnd" />
+
+                <TextView
                     android:id="@+id/pm10Min"
                     android:gravity="center"
                     android:padding="3dip"
-                    android:textStyle="normal|bold"
-                    android:textSize="16sp" />
+                    android:text="30"
+                    android:textSize="16sp"
+                    android:textStyle="normal|bold" />
             </TableRow>
         </TableLayout>
     </LinearLayout>
