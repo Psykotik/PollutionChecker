@@ -42,6 +42,17 @@
                 android:src="@drawable/icon_refresh" />
         </TableRow>
 
+        <!-- ligne son -->
+        <TableRow>
+
+            <ImageButton
+                android:id="@+id/button_sound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/sound"
+                android:src="@drawable/icon_sound" />
+        </TableRow>
+
     </TableLayout>
 
     <TableLayout

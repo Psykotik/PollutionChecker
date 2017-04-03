@@ -2,6 +2,7 @@ package fr.jordanlambert.myandroidapplication.tools;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -85,6 +87,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         ImageButton refreshButton = (ImageButton) holder.itemView.findViewById(R.id.button_refresh);
         // City cell
         final TableLayout cityCell = (TableLayout) holder.itemView.findViewById(R.id.contentTableLayout);
+        // Sound button
+        ImageButton soundButton = (ImageButton) holder.itemView.findViewById(R.id.button_sound);
+
+        // Sound creation
+        final MediaPlayer mp = MediaPlayer.create(mCtx, R.raw.ah);
+
 
         shareBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -97,11 +105,41 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         refreshButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Log.i(TAG, "refreshButton cell " + position );
+
+                CharSequence text = "Refreshing data … Be patient !";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(mCtx, text, duration);
+                toast.show();
             }
         });
         cityCell.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Log.i(TAG, "cityCell " + position);
+
+            }
+        });
+        soundButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Log.i(TAG, "SoundButton" + position);
+
+                if(msg.getIaqi().get(0).getV().get(0) > 50) {
+                    mp.setVolume(50,50);
+                    mp.start();
+
+                    CharSequence text = "The pollution level is above the maximum 50 units recommended. Be careful !";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(mCtx, text, duration);
+                    toast.show();
+                }
+                else {
+                    CharSequence text = "The pollution level is under the maximum 50 units recommended. All is fine !";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(mCtx, text, duration);
+                    toast.show();
+                }
 
             }
         });
