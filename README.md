@@ -30,3 +30,6 @@ Clone the project and build it from Android Studio. You can also run PollutionCh
 ## Note :
 
 An active internet connection is required to get informations from the API. Don't be afraid of the internet permission then.
+
+You can download the latest [Android studio](https://developer.android.com/studio/index.html) here.
+
