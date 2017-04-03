@@ -28,6 +28,7 @@ import fr.jordanlambert.myandroidapplication.model.MessageObject;
  * Created by jordan on 27/03/2017.
  */
 
+@SuppressWarnings("ALL")
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private ArrayList<GlobalObject> mDataset;
     private Context mCtx;
@@ -93,7 +94,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // Sound creation
         final MediaPlayer mp = MediaPlayer.create(mCtx, R.raw.ah);
 
-
         shareBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Log.i(TAG, "shareButton cell " + position);
@@ -111,6 +111,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
                 Toast toast = Toast.makeText(mCtx, text, duration);
                 toast.show();
+
             }
         });
         cityCell.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +153,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 String mButtonValue = msg.getIaqi().get(i).getV().get(0).toString();
                 String maxValue = msg.getIaqi().get(i).getV().get(2).toString();
                 String minValue = msg.getIaqi().get(i).getV().get(1).toString();
-                Integer temperatureValue = msg.getIaqi().get(i).getV().get(0);
                 holder.mButton.setText(mButtonValue);
                 holder.max.setText(maxValue);
                 holder.min.setText(minValue);
@@ -162,9 +162,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 } else if(msg.getIaqi().get(i).getV().get(0)<100) {
                     holder.global.setTextColor(ContextCompat.getColor(mCtx, R.color.orange));
                     holder.mButton.setBackgroundColor(ContextCompat.getColor(mCtx, R.color.orange));
-                } else {
+                } else if(msg.getIaqi().get(i).getV().get(0)<150) {
                     holder.global.setTextColor(ContextCompat.getColor(mCtx, R.color.red));
                     holder.mButton.setBackgroundColor(ContextCompat.getColor(mCtx, R.color.red));
+                } else if(msg.getIaqi().get(i).getV().get(0)<200) {
+                    holder.global.setTextColor(ContextCompat.getColor(mCtx, R.color.purple));
+                    holder.mButton.setBackgroundColor(ContextCompat.getColor(mCtx, R.color.purple));
+                } else {
+                    holder.global.setTextColor(ContextCompat.getColor(mCtx, R.color.brown));
+                    holder.mButton.setBackgroundColor(ContextCompat.getColor(mCtx, R.color.brown));
                 }
             }
             if(msg.getIaqi().get(i).getP().contains("t")) {
