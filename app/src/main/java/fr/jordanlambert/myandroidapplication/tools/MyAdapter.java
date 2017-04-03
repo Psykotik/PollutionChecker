@@ -88,8 +88,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         shareBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("MyAdapter", "Sharebutton");
-                sendEmail();
+                Log.i(TAG, "shareButton cell " + position);
+                String city = msg.getCity().getName();
+                Integer pollution = msg.getIaqi().get(0).getV().get(0);
+                sendEmail(city, pollution);
             }
         });
         refreshButton.setOnClickListener(new View.OnClickListener() {
@@ -150,26 +152,37 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return mDataset.size();
     }
 
-    protected void sendEmail() {
+    protected void sendEmail(String c, Integer p) {
         Log.i("Send email", "");
         String[] TO = {""};
         String[] CC = {""};
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
 
+        String link_val = "https://github.com/Psykotik/PollutionChecker";
+        String body = "The pollution level at " + c + " is about " + p + " units.\nIf you want to try this new application, go for <a href=\"" + link_val + "\">" + link_val + "</a>. Hope you'll enjoy it !\n See you soon.";
+        String subject = "Pollution level at " + c + " !";
+        if(p >= 50) {
+            body = "Warning ! The pollution level at " + c + " is about " + p + " units, and it can be dangerous !\nIf you want to try this new application, go for <a href=\"" + link_val + "\">" + link_val + "</a>. Hope you'll enjoy it !\n See you soon.";
+            subject = "High pollution level at " + c + " !";
+        }
+
+
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(body));
+
+
         emailIntent.setData(Uri.parse("mailto:"));
-        emailIntent.setType("text/plain");
+        emailIntent.setType("message/rfc822");
         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
         emailIntent.putExtra(Intent.EXTRA_CC, CC);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Try PollutionCheckin Application !");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Hey ! Wassup ? I'm trying a new cool application, wanna try it ? Go for Psykotik github and search for PollutionChecker Repo. Hope you'll enjoy it ma boi !");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml( body ));
+        try {
+            mCtx.startActivity(Intent.createChooser(emailIntent, "Send mail..."));
 
-        /*try {
-            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-            finish();
             Log.i("Finished sending mail.", "");
         } catch (android.content.ActivityNotFoundException ex) {
             Log.e("MyAdapter", "There is no email client installed");
-        }*/
+        }
     }
 }
 
