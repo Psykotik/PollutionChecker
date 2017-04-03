@@ -14,6 +14,27 @@
         android:id="@+id/my_recycler_view"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/send"/>
+
+    <Button
+        android:text="Send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/send"
+        android:enabled="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="15"
+        android:id="@+id/textEditCityID"
+        android:hint="Enter city ID"
+        android:layout_above="@+id/my_recycler_view"
+        android:layout_alignParentStart="true"
+        android:imeOptions="actionGo|actionDone" />
 
 </RelativeLayout>
