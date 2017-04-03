@@ -2,6 +2,9 @@
 
 Android application based on [**WAQI API**](http://waqi.info/) (waqi). This project is for training purpose on school.
 
+<img src="http://img4.hostingpics.net/pics/522772Screenshot20170403153518.png" alt="Screenshot2" width="270" height="480"/> <img src="http://img4.hostingpics.net/pics/260516Screenshot20170403153527.png" alt="Screenshot2" width="270" height="480"/>
+
+
 ## Features
 
 This applications provides you some cool features, such as :
