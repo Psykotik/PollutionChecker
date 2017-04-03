@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">PollutionChecker</string>
+    <string name="app_name" translatable="false">PollutionChecker</string>
+    <string name="loading">Loading ...</string>
+    <string name="temperature">Temperature</string>
+    <string name="gpsCoords">Coordinates :</string>
+    <string name="numberPlaceholder" translatable="false">00</string>
+    <string name="lastUpdate">Last Update :</string>
+    <string name="maxRate">Max rate :</string>
+    <string name="minRate">Min rate :</string>
+    <string name="gpsPlaceholder" translatable="false">00.00, 11.11</string>
+    <string name="refresh">Refresh</string>
+    <string name="share">Share</string>
 </resources>
