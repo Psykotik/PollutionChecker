@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private DatabaseHandler db;
-    private ArrayList<String> myDataset = new ArrayList<>(); //{"@3067", "@3071"};
+    private ArrayList<String> myDataset = new ArrayList<>();
     private ArrayList<GlobalObject> initialCities = new ArrayList<>();
     private String TAG = "MainActivity";
 
@@ -66,8 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
         myDataset.add("@3067");
         myDataset.add("@3071");
-        myDataset.add("@5771");
-        myDataset.add("@4070");
+        myDataset.add("@5167");
+        myDataset.add("@1452");
+        myDataset.add("@1454");
+        myDataset.add("@645");
+
 
         Log.i(TAG, "Taille : " + myDataset.size());
 
@@ -86,6 +89,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    /**
+     * This function get data from waqi api (https://api.waqi.info/api/) and notify the adapter of the new data
+     *
+     * @param  url         String
+     * @return             Void
+     */
 
     private void getDataFromUrl(String url) {
         // Instantiate the RequestQueue.

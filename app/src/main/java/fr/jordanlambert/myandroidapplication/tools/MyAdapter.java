@@ -190,29 +190,40 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.gps.setText(msg.getCity().getGeo()[0].substring(0,5)+", "+msg.getCity().getGeo()[1].substring(0,5));
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
+
+    /**
+     * This function return the size of the dataset, invoked by the layout manager
+     *
+     * @return mDataset.size()
+     */
     @Override
     public int getItemCount() {
         return mDataset.size();
     }
 
-    protected void sendEmail(String c, Integer p) {
+    /**
+     * This function is called to send email with two args (city and pollution)
+     * It will call installed mail client to send it, via intent.
+     * Also, a predefined template is created, so the user can directly send the mail to one of his contact
+     *
+     * @param  city         String for the city name
+     * @param  pollution    Integer for pollution value
+     * @return              Void
+     */
+
+    protected void sendEmail(String city, Integer pollution) {
         Log.i("Send email", "");
         String[] TO = {""};
         String[] CC = {""};
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
 
         String link_val = "https://github.com/Psykotik/PollutionChecker";
-        String body = "The pollution level at " + c + " is about " + p + " units.\nIf you want to try this new application, go for <a href=\"" + link_val + "\">" + link_val + "</a>. Hope you'll enjoy it !\n See you soon.";
-        String subject = "Pollution level at " + c + " !";
-        if(p >= 50) {
-            body = "Warning ! The pollution level at " + c + " is about " + p + " units, and it can be dangerous !\nIf you want to try this new application, go for <a href=\"" + link_val + "\">" + link_val + "</a>. Hope you'll enjoy it !\n See you soon.";
-            subject = "High pollution level at " + c + " !";
+        String body = "The pollution level at " + city + " is about " + pollution + " units.\nIf you want to try this new application, go for <a href=\"" + link_val + "\">" + link_val + "</a>. Hope you'll enjoy it !\n See you soon.";
+        String subject = "Pollution level at " + city + " !";
+        if(pollution >= 50) {
+            body = "Warning ! The pollution level at " + city + " is about " + pollution + " units, and it can be dangerous !\nIf you want to try this new application, go for <a href=\"" + link_val + "\">" + link_val + "</a>. Hope you'll enjoy it !\n See you soon.";
+            subject = "High pollution level at " + city + " !";
         }
-
-
-        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(body));
-
 
         emailIntent.setData(Uri.parse("mailto:"));
         emailIntent.setType("message/rfc822");
