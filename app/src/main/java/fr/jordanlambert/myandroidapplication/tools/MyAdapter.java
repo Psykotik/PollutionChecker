@@ -1,17 +1,24 @@
 package fr.jordanlambert.myandroidapplication.tools;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.nfc.Tag;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import fr.jordanlambert.myandroidapplication.MainActivity;
 import fr.jordanlambert.myandroidapplication.R;
 import fr.jordanlambert.myandroidapplication.model.GlobalObject;
 import fr.jordanlambert.myandroidapplication.model.MessageObject;
@@ -72,6 +79,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - replace the contents of the view with that elementpublic Button mButton;
         MessageObject msg = mDataset.get(position).getRxs().getObs().get(0).getMsg();
 
+        // Send email button
+        ImageButton shareBtn = (ImageButton) holder.itemView.findViewById(R.id.button_share);
+        ImageButton refreshButton = (ImageButton) holder.itemView.findViewById(R.id.button_refresh);
+
+        shareBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Log.i("MyAdapter", "Sharebutton");
+                sendEmail();
+            }
+        });
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Log.i("MyAdapter", "Sharebutton");
+                sendEmail();
+            }
+        });
+
         for(int i=0;i<msg.getIaqi().size();i++) {
             // Color buttons and cities with pm10 values
             if(msg.getIaqi().get(i).getP().contains("pm10")) {
@@ -109,4 +133,27 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public int getItemCount() {
         return mDataset.size();
     }
+
+    protected void sendEmail() {
+        Log.i("Send email", "");
+        String[] TO = {""};
+        String[] CC = {""};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Try PollutionCheckin Application !");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Hey ! Wassup ? I'm trying a new cool application, wanna try it ? Go for Psykotik github and search for PollutionChecker Repo. Hope you'll enjoy it ma boi !");
+
+        /*try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            finish();
+            Log.i("Finished sending mail.", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            Log.e("MyAdapter", "There is no email client installed");
+        }*/
+    }
 }
+
