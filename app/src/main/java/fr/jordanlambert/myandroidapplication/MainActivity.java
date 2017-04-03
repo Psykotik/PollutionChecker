@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Button;
@@ -102,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
      * This function get data from waqi api (https://api.waqi.info/api/) and notify the adapter of the new data
      *
      * @param  url         String
-     * @return             Void
      */
 
     private void getDataFromUrl(String url) {

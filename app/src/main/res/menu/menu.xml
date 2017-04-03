@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/action_night_day"
+        android:title="Change theme"
+        android:icon="@drawable/icon_theme"
+        app:showAsAction="ifRoom" />
+
+</menu>

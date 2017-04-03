@@ -208,7 +208,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
      *
      * @param  city         String for the city name
      * @param  pollution    Integer for pollution value
-     * @return              Void
      */
 
     protected void sendEmail(String city, Integer pollution) {
