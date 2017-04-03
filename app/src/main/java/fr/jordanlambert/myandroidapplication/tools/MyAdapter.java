@@ -1,9 +1,13 @@
 package fr.jordanlambert.myandroidapplication.tools;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -133,6 +137,26 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
                     Toast toast = Toast.makeText(mCtx, text, duration);
                     toast.show();
+
+                } else if(msg.getIaqi().get(0).getV().get(0) > 100) {
+                    Log.d(TAG, "Call notifnication");
+                    Intent intent = new Intent(mCtx, MyAdapter.class);
+                    PendingIntent contentIntent = PendingIntent.getActivity(mCtx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                    NotificationCompat.Builder b = new NotificationCompat.Builder(mCtx);
+
+                    b.setAutoCancel(true)
+                            .setDefaults(Notification.DEFAULT_ALL)
+                            .setWhen(System.currentTimeMillis())
+                            .setSmallIcon(R.drawable.notification_icon)
+                            .setContentTitle("Alert : " + msg.getCity().getName() + "is over polluated" )
+                            .setContentText(" This city has a pollution level near " + msg.getIaqi().get(0).getV().get(0).toString() + ". Be careful !")
+                            .setDefaults(Notification.DEFAULT_LIGHTS| Notification.DEFAULT_SOUND)
+                            .setContentIntent(contentIntent);
+
+
+                    NotificationManager notificationManager = (NotificationManager) mCtx.getSystemService(Context.NOTIFICATION_SERVICE);
+                    notificationManager.notify(1, b.build());
                 }
                 else {
                     CharSequence text = "The pollution level is under the maximum 50 units recommended. All is fine !";
