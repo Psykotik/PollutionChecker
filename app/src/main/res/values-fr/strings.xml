@@ -9,5 +9,4 @@
     <string name="share">Partager</string>
     <string name="refresh">Rafraichir</string>
     <string name="sound">Son</string>
-    <string name="toast_pollution_above50">Le niveau de pollution est supérieur aux 50 unités max recommandées. Soyez prudent !</string>
 </resources>
