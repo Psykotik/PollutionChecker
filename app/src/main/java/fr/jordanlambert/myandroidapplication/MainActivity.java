@@ -40,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
         Calendar c = Calendar.getInstance();
         int hours = c.get(Calendar.HOUR);
 
-            if(hours > 18){
-                setTheme(R.style.AppTheme);
-            } else {
-                setTheme(R.style.AppThemeLight);
-            }
+        if(hours > 18){
+            setTheme(R.style.AppTheme);
+        } else {
+            setTheme(R.style.AppThemeLight);
+        }
 
         setContentView(R.layout.activity_main);
 

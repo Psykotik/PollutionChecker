@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ import fr.jordanlambert.myandroidapplication.model.MessageObject;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private ArrayList<GlobalObject> mDataset;
     private Context mCtx;
+    private String TAG = "MyAdapter";
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -71,14 +74,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that elementpublic Button mButton;
-        MessageObject msg = mDataset.get(position).getRxs().getObs().get(0).getMsg();
+        final MessageObject msg = mDataset.get(position).getRxs().getObs().get(0).getMsg();
 
         // Send email button
         ImageButton shareBtn = (ImageButton) holder.itemView.findViewById(R.id.button_share);
+        // Refresh email button
         ImageButton refreshButton = (ImageButton) holder.itemView.findViewById(R.id.button_refresh);
+        // City cell
+        final TableLayout cityCell = (TableLayout) holder.itemView.findViewById(R.id.contentTableLayout);
 
         shareBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -88,17 +94,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         });
         refreshButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("MyAdapter", "Sharebutton");
-                sendEmail();
+                Log.i(TAG, "refreshButton cell " + position );
             }
         });
+        cityCell.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Log.i(TAG, "cityCell " + position);
+
+            }
+        });
+
+
 
         for(int i=0;i<msg.getIaqi().size();i++) {
             // Color buttons and cities with pm10 values
             if(msg.getIaqi().get(i).getP().contains("pm10")) {
-                holder.mButton.setText(msg.getIaqi().get(i).getV().get(0).toString());
-                holder.max.setText(msg.getIaqi().get(i).getV().get(2).toString());
-                holder.min.setText(msg.getIaqi().get(i).getV().get(1).toString());
+                String mButtonValue = msg.getIaqi().get(i).getV().get(0).toString();
+                String maxValue = msg.getIaqi().get(i).getV().get(2).toString();
+                String minValue = msg.getIaqi().get(i).getV().get(1).toString();
+                Integer temperatureValue = msg.getIaqi().get(i).getV().get(0);
+                holder.mButton.setText(mButtonValue);
+                holder.max.setText(maxValue);
+                holder.min.setText(minValue);
                 if(msg.getIaqi().get(i).getV().get(0)<50) {
                     holder.global.setTextColor(ContextCompat.getColor(mCtx, R.color.green));
                     holder.mButton.setBackgroundColor(ContextCompat.getColor(mCtx, R.color.green));
@@ -112,11 +129,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             }
             if(msg.getIaqi().get(i).getP().contains("t")) {
                 String city = msg.getCity().getName();
-                if(msg.getCity().getName().length()>20) {
-                    city = msg.getCity().getName().substring(0,20)+"...";
+                if(msg.getCity().getName().length()>25) {
+                    city = msg.getCity().getName().substring(0,25)+"...";
                 }
                 holder.global.setText(city+" "+msg.getIaqi().get(i).getV().get(0)+"°C");
             }
+
+
         }
 
         Calendar calendar = Calendar.getInstance();
