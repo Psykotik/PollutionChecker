@@ -3,7 +3,6 @@ package fr.jordanlambert.myandroidapplication.tools;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,12 +12,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import fr.jordanlambert.myandroidapplication.MainActivity;
 import fr.jordanlambert.myandroidapplication.R;
 import fr.jordanlambert.myandroidapplication.model.GlobalObject;
 import fr.jordanlambert.myandroidapplication.model.MessageObject;

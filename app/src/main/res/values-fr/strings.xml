@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="loading">Chargement ...</string>
+    <string name="loading">Chargement …</string>
     <string name="temperature">Température</string>
     <string name="gpsCoords">Coordonnées :</string>
     <string name="lastUpdate">Dernière mise à jour :</string>
