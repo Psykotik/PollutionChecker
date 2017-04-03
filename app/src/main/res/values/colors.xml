@@ -15,5 +15,7 @@
     <color name="green">#37cf2c</color>
     <color name="red">#ff4040</color>
     <color name="orange">#ffb940</color>
+    <color name="purple">#660099</color>
+    <color name="brown">#7e0023</color>
 
 </resources>
